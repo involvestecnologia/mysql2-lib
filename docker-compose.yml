@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  mysql:
+    image: "mysql:5.7"
+    container_name: mysql2-lib
+    restart: always
+    networks:
+      - mysql-lib-network
+    environment: 
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+
+  test:
+    build: 
+      context: .
+      target: test
+    image: "test_mysql-lib:latest"
+    networks:
+      - mysql-lib-network
+    depends_on:
+      - mysql
+    environment:
+      - LOG_LEVEL=error
+      - MYSQL_URL=mysql2-lib
+      - MYSQL_USER=root
+      - WAIT_HOSTS=mysql2-lib:3306
+
+networks:
+  mysql-lib-network:
+    driver: bridge
