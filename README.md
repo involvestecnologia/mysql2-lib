@@ -1,6 +1,6 @@
 # @involves/mysql2-lib
 
-[![Build status](https://badge.buildkite.com/724b7254015fc277fe6480cfdafbe57d80178f20359871459d.svg)](https://buildkite.com/involves/nodejs-lib-mysql)
+[![Build status](https://badge.buildkite.com/87ff5c12adfc88e2e42d690f00aac6f5f26bcda2a9c709944f.svg)](https://buildkite.com/involves/nodejs-lib-mysql2)
 
 ## Install
 ```
