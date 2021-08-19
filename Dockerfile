@@ -34,5 +34,6 @@ RUN npm publish
 FROM dependencies AS test
 USER node
 COPY --chown=node:node wait /wait
+RUN chmod +x /wait
 COPY --chown=node:node . ./
 CMD ["sh", "-c", "/wait && npm run coverage"]
