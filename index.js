@@ -5,5 +5,5 @@ const MysqlMiddleware = require('./src/mysql-middleware')
 module.exports = {
   MysqlConnection,
   MysqlDatabase,
-  MysqlMiddleware  
+  MysqlMiddleware
 }
