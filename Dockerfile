@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:experimental
 
 # ---- Base Node ----
-FROM node:16-alpine AS base
+FROM node:16-stretch AS base
 RUN npm set progress=false && \
     npm config set depth 0 && \
     npm config set ignore-scripts true
@@ -9,8 +9,6 @@ WORKDIR /data
 RUN mkdir -p /home/node/.npm && \
     chown -R node:node /data && \
     chown -R node:node /home/node/.npm
-RUN --mount=type=cache,uid=1000,gid=1000,target=/home/node/.npm \
-    npm install --global --no-audit npm
 COPY --chown=node:node .npmrc package.json ./
 
 FROM base AS dependencies-update
@@ -24,10 +22,15 @@ RUN --mount=type=cache,uid=1000,gid=1000,target=/home/node/.npm \
 
 FROM base AS publish
 ARG NPM_TOKEN
-RUN npm config set commit-hooks false
+ARG GIT_EMAIL
+ARG GIT_USER
 COPY --chown=node:node . ./
-RUN npm version patch && \
-    npm publish
+USER node
+RUN git config --global user.email ${GIT_EMAIL} && \
+    git config --global user.name ${GIT_USER} && \
+    npm version patch -m "[skip ci] [CI] Bumping to %s" && \
+    npm publish && \
+    git push --tags -u origin master
 
 # ---- Test/Cover ----
 FROM dependencies AS test
