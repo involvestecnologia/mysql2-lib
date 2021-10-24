@@ -21,19 +21,19 @@
   },
   "homepage": "https://github.com/involvestecnologia/mysql2-lib",
   "dependencies": {
-    "mysql2": "^2.3.0"
+    "mysql2": "^2.3.2"
   },
   "devDependencies": {
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.1.0",
     "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.24.0",
+    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-mocha": "^9.0.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-promise": "^5.1.1",
     "express": "^4.17.1",
-    "mocha": "^9.0.3",
+    "mocha": "^9.1.3",
     "nyc": "^15.1.0"
   }
 }
