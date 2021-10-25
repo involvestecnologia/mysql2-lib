@@ -28,6 +28,15 @@ steps:
       queue: "docker"
     if: build.source == "schedule"
 
+  - label: "Lint"
+    key: "lint"
+    command:
+      - docker build --tag=$$BUILDKITE_BUILD_ID --target=lint .
+      - docker run --rm $$BUILDKITE_BUILD_ID
+    agents:
+      queue: "docker"
+    if: build.source != "schedule"
+
   - label: "Tests"
     key: "test"
     env:
@@ -47,5 +56,6 @@ steps:
     agents:
       queue: "docker"
     depends_on:
+      - "lint"
       - "test"
     if: build.source != "schedule" && build.branch == "master"

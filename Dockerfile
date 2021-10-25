@@ -32,6 +32,11 @@ RUN git config --global user.email ${GIT_EMAIL} && \
     npm publish && \
     git push --tags -u origin master
 
+# ---- Lint ----
+FROM dependencies AS lint
+COPY --chown=node:node . ./
+CMD ["node_modules/eslint/bin/eslint.js", "."]
+
 # ---- Test/Cover ----
 FROM dependencies AS test
 USER node
