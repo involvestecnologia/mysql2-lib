@@ -1,4 +1,3 @@
-'use strict'
 
 const MysqlConnection = require('./mysql-connection')
 const MysqlDatabase = require('./mysql-database')

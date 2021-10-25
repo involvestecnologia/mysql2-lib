@@ -5,7 +5,7 @@ const assert = require('assert').strict
 const { MysqlConnection, MysqlDatabase } = require('../index')
 
 describe('Integration tests for MysqlDatabase', function () {
-  let pool
+  let pool = {}
 
   beforeEach(async function () {
     pool = await MysqlConnection.getConnectionPool(process.env.MYSQL_URL)

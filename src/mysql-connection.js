@@ -28,18 +28,18 @@ class MysqlConnection {
 const _connect = async (connectionPool, host, user, password) => {
   if (connectionPool && !connectionPool._closed) return connectionPool
 
-  connectionPool = mysql.createPool(
+  const connection = mysql.createPool(
     {
-      host: host,
-      user: user,
-      password: password,
-      waitForConnections: false,
-      connectionLimit: process.env.MYSQL_NUMBER_OF_CONNECTIONS || 10
+      connectionLimit: process.env.MYSQL_NUMBER_OF_CONNECTIONS || 10,
+      host,
+      password,
+      user,
+      waitForConnections: false
     }
   )
 
-  await connectionPool.promise().query('SELECT 1+1 AS test')
-  return connectionPool
+  await connection.promise().query('SELECT 1+1 AS test')
+  return connection
 }
 
 module.exports = MysqlConnection

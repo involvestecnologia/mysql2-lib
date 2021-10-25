@@ -16,8 +16,8 @@ class MysqlDatabase {
     return this.promise.format(sql, values)
   }
 
-  async query (sql) {
-    return await this.promise.query(sql)
+  query (sql) {
+    return this.promise.query(sql)
   }
 }
 

@@ -6,7 +6,7 @@ const { MysqlConnection } = require('../index')
 
 describe('Integration tests for MysqlConnection', function () {
   afterEach(async function () {
-    MysqlConnection.closeConnectionPool()
+    await MysqlConnection.closeConnectionPool()
   })
 
   it('should connect properly', async function () {
