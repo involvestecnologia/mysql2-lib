@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/involvestecnologia/mysql2-lib",
   "dependencies": {
-    "mysql2": "^2.3.2"
+    "mysql2": "^2.3.3"
   },
   "devDependencies": {
     "chai": "^4.3.4",
