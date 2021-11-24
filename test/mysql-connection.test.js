@@ -28,4 +28,20 @@ describe('Integration tests for MysqlConnection', function () {
       assert.equal(err.code, 'ECONNREFUSED')
     }
   })
+
+  it('should await for connection', async function () {
+    const conn = await MysqlConnection.getConnectionPool(process.env.MYSQL_URL,
+      process.env.MYSQL_USER, process.env.MYSQL_PASSWORD)
+
+    const promises = []
+    const _executeQuery = () => {
+      return conn.promise().query('SELECT * FROM mysql.db')
+    }
+
+    for (let index = 0; index < 100; index++) {
+      promises.push(_executeQuery())
+    }
+
+    await Promise.all(promises)
+  })
 })

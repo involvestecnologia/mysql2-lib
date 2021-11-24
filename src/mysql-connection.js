@@ -34,7 +34,7 @@ const _connect = async (connectionPool, host, user, password) => {
       host,
       password,
       user,
-      waitForConnections: false
+      waitForConnections: true
     }
   )
 
