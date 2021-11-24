@@ -28,3 +28,8 @@ test:
 .PHONY: clean
 clean:
 	docker-compose down
+
+.PHONY: lint
+lint:
+	@docker build --pull --tag=$(PROJECT_NAME)-lint:latest --target=lint .
+	@docker run --rm $(PROJECT_NAME)-lint:latest

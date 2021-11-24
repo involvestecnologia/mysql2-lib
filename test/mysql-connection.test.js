@@ -34,9 +34,7 @@ describe('Integration tests for MysqlConnection', function () {
       process.env.MYSQL_USER, process.env.MYSQL_PASSWORD)
 
     const promises = []
-    const _executeQuery = () => {
-      return conn.promise().query('SELECT * FROM mysql.db')
-    }
+    const _executeQuery = () => conn.promise().query('SELECT * FROM mysql.db')
 
     for (let index = 0; index < 100; index++) {
       promises.push(_executeQuery())
