@@ -9,8 +9,8 @@ class MysqlConnection {
    * @param {string} user - username to login
    * @param {string} password - password to login
    */
-  static async getConnectionPool (host, user = 'root', password = '') {
-    this.connectionPool = await _connect(this.connectionPool, host, user, password)
+  static async getConnectionPool (host, user = 'root', password = '', port = '3306') {
+    this.connectionPool = await _connect(this.connectionPool, host, user, password, port)
     return this.connectionPool
   }
 
@@ -25,7 +25,7 @@ class MysqlConnection {
   }
 }
 
-const _connect = async (connectionPool, host, user, password) => {
+const _connect = async (connectionPool, host, user, password, port) => {
   if (connectionPool && !connectionPool._closed) return connectionPool
 
   const connection = mysql.createPool(
@@ -34,6 +34,7 @@ const _connect = async (connectionPool, host, user, password) => {
       host,
       password,
       user,
+      port,
       waitForConnections: true
     }
   )

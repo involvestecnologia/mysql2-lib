@@ -14,6 +14,19 @@ describe('Integration tests for MysqlConnection', function () {
       process.env.MYSQL_USER, process.env.MYSQL_PASSWORD))
   })
 
+  it('should connect properly informing port', async function () {
+    assert.doesNotReject(await MysqlConnection.getConnectionPool(process.env.MYSQL_URL,
+      process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, 3306))
+  })
+
+  it('should not connect properly on nonexistent port', async function () {
+    try {
+      await MysqlConnection.getConnectionPool(process.env.MYSQL_URL, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, 3307)
+    } catch (err) {
+      assert.equal(err.code, 'ECONNREFUSED')
+    }
+  })
+
   it('should use the same connection object', async function () {
     const pool = await MysqlConnection.getConnectionPool(process.env.MYSQL_URL)
     const pool2 = await MysqlConnection.getConnectionPool(process.env.MYSQL_URL)

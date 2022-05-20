@@ -39,6 +39,8 @@
           "error",
           "as-needed"
       ],
+      "sort-keys": "off",
+      "sort-vars": "off",
       "security/detect-non-literal-fs-filename": "off",
       "security/detect-object-injection": "off"
   },
