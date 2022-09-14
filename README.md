@@ -1,7 +1,7 @@
 # @involves/mysql2-lib
 
 [![Build status](https://badge.buildkite.com/87ff5c12adfc88e2e42d690f00aac6f5f26bcda2a9c709944f.svg)](https://buildkite.com/involves/nodejs-lib-mysql2)
-
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=involvestecnologia_mysql2-lib&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=involvestecnologia_mysql2-lib)
 ## Install
 ```
 npm install @involves/mysql2-lib --save
