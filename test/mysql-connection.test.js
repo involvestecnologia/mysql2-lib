@@ -19,6 +19,11 @@ describe('Integration tests for MysqlConnection', function () {
       process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, 3306))
   })
 
+  it('should connect properly informing multipleStatements', async function () {
+    assert.doesNotReject(await MysqlConnection.getConnectionPool(process.env.MYSQL_URL,
+      process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, 3306, true))
+  })
+
   it('should not connect properly on nonexistent port', async function () {
     try {
       await MysqlConnection.getConnectionPool(process.env.MYSQL_URL, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, 3307)

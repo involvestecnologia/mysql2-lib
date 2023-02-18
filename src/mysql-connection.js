@@ -8,9 +8,10 @@ class MysqlConnection {
    * @param {string} host - IP or name to establish connection. Example {mysql-pod-name}:3306
    * @param {string} user - username to login
    * @param {string} password - password to login
+   * @param {boolean} multipleStatements - allow multipleStatements
    */
-  static async getConnectionPool (host, user = 'root', password = '', port = '3306') {
-    this.connectionPool = await _connect(this.connectionPool, host, user, password, port)
+  static async getConnectionPool (host, user = 'root', password = '', port = '3306', multipleStatements = false) {
+    this.connectionPool = await _connect(this.connectionPool, host, user, password, port, multipleStatements)
     return this.connectionPool
   }
 
@@ -25,7 +26,7 @@ class MysqlConnection {
   }
 }
 
-const _connect = async (connectionPool, host, user, password, port) => {
+const _connect = async (connectionPool, host, user, password, port, multipleStatements) => {
   if (connectionPool && !connectionPool._closed) return connectionPool
 
   const connection = mysql.createPool(
@@ -35,7 +36,8 @@ const _connect = async (connectionPool, host, user, password, port) => {
       password,
       user,
       port,
-      waitForConnections: true
+      waitForConnections: true,
+      multipleStatements: multipleStatements
     }
   )
 
