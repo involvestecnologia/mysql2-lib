@@ -51,12 +51,12 @@ steps:
   - label: "Publish Library"
     key: "publish"
     command:
-      - git checkout master && git fetch && git pull --rebase
-      - git config --global user.email ${GIT_EMAIL}
-      - git config --global user.name ${GIT_USER}
-      - npm version patch -m "[skip ci] [CI] Bumping to %s"
+      # - git checkout master && git fetch && git pull --rebase
+      # - git config --global user.email ${GIT_EMAIL}
+      # - git config --global user.name ${GIT_USER}
+      # - npm version patch -m "[skip ci] [CI] Bumping to %s"
+      # - git push --tags -u origin master
       - npm publish
-      - git push --tags -u origin master
     agents:
       queue: "node16"
     depends_on:
