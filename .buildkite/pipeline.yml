@@ -52,9 +52,13 @@ steps:
     key: "publish"
     command:
       - git checkout master && git fetch && git pull --rebase
-      - docker build --build-arg NPM_TOKEN=$$NPM_TOKEN --build-arg GIT_EMAIL=$$GIT_EMAIL --build-arg GIT_USER=$$GIT_USER --tag=$$BUILDKITE_BUILD_ID --target=publish .
+      - git config --global user.email ${GIT_EMAIL}
+      - git config --global user.name ${GIT_USER}
+      - npm version patch -m "[skip ci] [CI] Bumping to %s"
+      - npm publish
+      - git push --tags -u origin master
     agents:
-      queue: "docker"
+      queue: "node16"
     depends_on:
       - "lint"
       - "test"
